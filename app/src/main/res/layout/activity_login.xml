@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="30dp"
+  android:background="#00ffff"
+  tools:context=".Login.ActivityLogin">
+  <LinearLayout
+    android:id="@+id/ll_1"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="400dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center_vertical">
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="电话:"/>
+    <EditText
+      android:id="@+id/et_phone"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="9"/>
+  </LinearLayout>
+  <LinearLayout
+    android:id="@+id/ll_2"
+    android:layout_below="@+id/ll_1"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="密码:"/>
+    <EditText
+      android:id="@+id/et_password"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:password="true"
+      android:layout_weight="9"
+      tools:ignore="Deprecated" />
+  </LinearLayout>
+  <TextView
+    android:id="@+id/bt_login"
+    android:layout_below="@+id/ll_2"
+    android:layout_margin="40dp"
+    android:layout_centerHorizontal="true"
+    android:text="登录"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context="com.gq.video.fragment.FragmentVideos">
+
+<!--    视频列表-->
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/fresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rcv_videos"
+      app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+      app:spanCount="3"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--  <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:id="@+id/main_swipe">-->
+
+<!--  </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>-->
+
+
+</RelativeLayout>

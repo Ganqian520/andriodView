@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- 按下状态 -->
+<!--  <item  android:state_pressed="true">-->
+<!--    <shape android:shape="oval">-->
+<!--      <size-->
+<!--        android:width="5dp"-->
+<!--        android:height="5dp" />-->
+<!--      <solid android:color="@color/white" />-->
+<!--    </shape>-->
+<!--  </item>-->
+<!--  &lt;!&ndash; 焦点状态 &ndash;&gt;-->
+<!--  <item android:state_focused="true" >-->
+<!--    <shape android:shape="ring">-->
+<!--      <size-->
+<!--        android:width="15dp"-->
+<!--        android:height="15dp" />-->
+<!--      <solid android:color="@color/white" />-->
+<!--    </shape>-->
+<!--  </item>-->
+
+<!--  &lt;!&ndash; 选择状态 &ndash;&gt;-->
+<!--  <item android:state_selected="true">-->
+<!--    <shape android:shape="ring">-->
+<!--      <size-->
+<!--        android:width="10dp"-->
+<!--        android:height="10dp" />-->
+<!--      <solid android:color="@color/white" />-->
+<!--    </shape>-->
+<!--  </item>-->
+
+  <!-- 默认状态 -->
+  <item>
+    <shape android:shape="oval">
+      <size
+        android:width="8dp"
+        android:height="8dp" />
+      <solid android:color="@color/white" />
+    </shape>
+  </item>
+</selector>

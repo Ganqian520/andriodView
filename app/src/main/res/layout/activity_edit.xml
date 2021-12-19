@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.gq.video.activity.ActivityEdit">
+
+  <com.gq.video.widgets.ViewStatusBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <com.gq.music.util.Icon
+      android:id="@+id/ic_back"
+      android:text="@string/back"
+      android:gravity="center"
+      android:layout_width="50dp"
+      android:layout_height="match_parent"
+      android:layout_alignParentStart="true"/>
+    <TextView
+      android:id="@+id/tv_title"
+      android:gravity="center"
+      android:layout_width="200dp"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true"/>
+    <TextView
+      android:id="@+id/tv_ok"
+      android:text="确定"
+      android:gravity="center"
+      android:layout_width="50dp"
+      android:layout_height="match_parent"
+      android:layout_alignParentEnd="true"/>
+  </RelativeLayout>
+
+  <EditText
+    android:id="@+id/et"
+    android:hint="输入内容："
+    android:gravity="top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"/>
+
+</LinearLayout>

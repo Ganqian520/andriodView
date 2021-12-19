@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Visualizer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    let canvas = document.getElementById("canvas");
+    let canvasctx = canvas.getContext("2d");
+    let width = innerWidth;
+    let height = innerHeight;
+    let url = "https://sf6-cdn-tos.douyinstatic.com/obj/tos-cn-ve-2774/b1a4eab47c9f44328212d58fc2054636"
+    canvas.width = width;
+    canvas.height = height;
+    function javaCall1(str){
+      start(url)
+    }
+    function log(str){
+      str = `${str}`
+      window.android.get(str);
+    }
+    function start(url) {
+      log(url)
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', url, true)
+      xhr.responseType = 'arraybuffer'
+      xhr.onload = cb_xhr
+      xhr.send()
+      function cb_xhr(){
+        let AudCtx = new AudioContext();
+        let source = AudCtx.createBufferSource()
+        let analyser = AudCtx.createAnalyser();
+        analyser.fftSize = 256  //fft数组的两倍
+        AudCtx.decodeAudioData(xhr.response,function(buffer){
+          source.buffer = buffer
+          source.connect(analyser)
+          analyser.connect(AudCtx.destination)
+          source.start(0)
+          cb_decode()
+        })
+        function cb_decode(){
+          let length = analyser.frequencyBinCount
+          let list_data = new Uint8Array(length)
+          length *= 3/4
+          render()
+          function render(){
+            window.requestAnimationFrame(render)
+            analyser.getByteFrequencyData(list_data)
+            canvasctx.clearRect(0,0,width,height)
+            canvasctx.fillStyle='white'
+            for(let i=0;i<list_data.length;i++){
+              canvasctx.beginPath()
+              canvasctx.arc(width/length*i,height-height/255*list_data[i],1,0,2*Math.PI)
+              canvasctx.fill()
+            }
+          }
+        }
+      }
+    };
+  </script>
+</body>
+
+</html>

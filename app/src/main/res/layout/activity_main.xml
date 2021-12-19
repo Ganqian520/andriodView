@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:openDrawer="start">
+  <!--  主页面-->
+  <RelativeLayout
+    android:id="@+id/rel_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+      <com.gq.music.util.Icon
+        android:id="@+id/icon_add1"
+        android:layout_above="@id/vp2"
+        android:layout_marginBottom="20dp"
+        android:text="&#xe631;"
+        android:textColor="@color/white"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+    <com.gq.music.util.Icon
+      android:id="@+id/icon_search"
+      android:onClick="goSearch"
+      android:layout_above="@+id/icon_add1"
+      android:layout_marginBottom="20dp"
+      android:text="&#xe62b;"
+      android:textColor="@color/white"
+      android:layout_width="30dp"
+      android:layout_height="30dp"/>
+      <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp2"
+        android:overScrollMode="never"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/fg_control"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"/>
+
+      <FrameLayout
+        android:id="@+id/fg_control"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/trans_white_border"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+  </RelativeLayout>
+  <!--   侧滑栏-->
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left">
+    <FrameLayout
+      android:id="@+id/fg_drawer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+  </RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

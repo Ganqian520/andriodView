@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+<!--    background设置无效，设置alpha能取消黑色背景，但画笔颜色会受影响-->
+    <com.gq.music.spectrum.ViewCanvas
+      android:id="@+id/view_canvas"
+      android:background="#80ffff00"
+      android:alpha="0.9"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--自定义basedialog背景全透明无边框theme -->
+  <style name="myDialog" parent="android:style/Theme.Dialog">
+    <!--背景颜色及和透明程度-->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <!--是否去除标题 -->
+    <item name="android:windowNoTitle">true</item>
+    <!--是否去除边框-->
+    <item name="android:windowFrame">@null</item>
+    <!--是否浮现在activity之上-->
+    <item name="android:windowIsFloating">true</item>
+    <!--背景是否模糊-->
+    <item name="android:backgroundDimEnabled">true</item>
+<!--    消除阴影-->
+    <item name="android:windowContentOverlay">@null</item>
+  </style>
+
+<!--  从天而降弹窗-->
+  <style name="DialogFromTop" parent="@style/myDialog">
+    <item name="android:windowAnimationStyle">@style/Anim1</item>
+  </style>
+<!--  钢琴窗弹窗-->
+  <style name="DialogPianoWindow" parent="@style/myDialog">
+    <item name="android:windowAnimationStyle">@style/Anim2</item>
+  </style>
+<!--  播放页弹窗-->
+  <style name="DialogPlay" parent="@style/myDialog">
+    <item name="android:windowAnimationStyle">@style/AnimPlay</item>
+  </style>
+  <style name="DialogCollect" parent="@style/myDialog">
+    <item name="android:windowAnimationStyle">@style/AnimCollect</item>
+  </style>
+<!--  动画属性-->
+  <style name="Anim1" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/top_to_bottom</item>
+    <item name="android:windowExitAnimation">@anim/bottom_to_top</item>
+  </style>
+  <style name="Anim2" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/piano_window_come</item>
+    <item name="android:windowExitAnimation">@anim/piano_window_go</item>
+  </style>
+  <style name="AnimPlay" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/play_come</item>
+    <item name="android:windowExitAnimation">@anim/play_go</item>
+  </style>
+  <style name="AnimCollect" parent="@android:style/Animation">
+    <item name="android:windowEnterAnimation">@anim/collect_enter</item>
+    <item name="android:windowExitAnimation">@anim/collect_exit</item>
+  </style>
+</resources>

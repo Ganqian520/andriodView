@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:clipChildren="false"
+  android:background="@drawable/bg"
+  tools:context=".other.naked3d.ActivityNaked3d">
+<!--  <ImageView-->
+<!--    android:id="@+id/bg"-->
+<!--    android:layout_width="1500px"-->
+<!--    android:layout_height="3000px"-->
+<!--    android:maxWidth="1500px"-->
+<!--    android:maxHeight="3000px"-->
+<!--    android:src="@drawable/bg"/>-->
+  <RelativeLayout
+    android:layout_width="1500px"
+    android:layout_height="3500px"
+    android:background="@drawable/bg"
+    android:id="@+id/bg"/>
+  <TextView
+    android:id="@+id/tv"
+    android:layout_width="800px"
+    android:layout_height="100px"
+    android:text="外层外层外层外层外层外层"
+    android:gravity="center"
+    android:background="@drawable/trans_white_border"
+    android:textSize="15sp"
+    android:textColor="@color/white"
+    android:layout_centerInParent="true"/>
+</RelativeLayout>

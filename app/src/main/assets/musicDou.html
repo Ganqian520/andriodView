@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{margin:0;padding:0;box-sizing: border-box;}
+    #app{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgb(240, 240, 240);
+      width: 100vw;
+      height: 100vh;
+      padding-bottom: 5vw;
+    }
+    .spectrum_{
+      height:22.5vw;
+      width: 90vw;
+      border-radius: 2vh;
+      box-shadow: 0.6vh 0.6vh 0.5vh 0vh rgba(0, 0, 0, 0.1);
+      margin-top: 10vh;
+      margin-bottom: 5vh;
+    }
+    .spectrum{
+      height:22.5vw;
+      width: 90vw;
+      border-radius: 2vh;
+      box-shadow: -0.6vh -0.6vh 0.5vh 0vh rgba(255,255,255);
+    }
+    .list_div{
+      height: 70vh;
+      width: 90vw;
+      position: relative;
+      border-radius: 2vh;
+      box-shadow: -0.6vh -0.6vh 0.5vh 0vh rgba(255,255,255);
+    }
+    .list{
+      height: 100%;
+      overflow: scroll;
+      display: flex;
+      flex-direction: column;
+      width: 90vw;
+      border-radius: 2vh;
+      box-shadow: 0.6vh 0.6vh 0.5vh 0vh rgba(0, 0, 0, 0.1);
+    }
+    .item{
+      display: flex;
+      width: 100%;
+      height: 7vh;
+    }
+    .index{
+      flex: 1;
+      display: table-cell;
+      text-align: center;
+      line-height: 7vh;
+      font-size: 4vw;
+    }
+    .div_message{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      flex: 6;
+      height: 7vh;
+    }
+    .name{
+      width: 80%;
+      overflow: hidden;
+      font-size: 4vw;
+    }
+    .author{
+      width: 80%;
+      color: rgba(0, 0, 0, 0.356);
+      font-size: 3vw;
+    }
+    .list::-webkit-scrollbar {
+      width: 0px;
+    }
+    .blank{
+      width: 100vw;
+      height: 10vh;
+      box-shadow: 0vh 0.6vh 0.5vh 0vh rgba(0, 0, 0, 0.1);
+    }
+  </style>
+    <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="blank"></div>
+    <div class="spectrum_">
+        <div class="spectrum" id="spectrum">
+            <canvas id="canvas"/>
+        </div>
+    </div>
+    <div class="list_div">
+        <div class="list">
+            <div class="item" v-for="(item,index) in list" :key="index" @click="play(item.res.musicUrl,index)">
+                <div class="index" :style="{fontWeight: index==currentIndex ? 900 : 'normal'}">{{list.length-index}}</div>
+                <div class="div_message">
+                    <div class="name">{{item.name}}</div>
+                    <div class="author">{{item.res.musicAuthor}}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+  const {createApp,toRefs,reactive,onMounted} = Vue
+  const state = reactive({
+        list:[],
+        currentIndex:-1,
+        sbH:71,
+  })
+  const app = createApp({
+    setup(){
+      const length = 128
+      const count = length
+      const list = new Uint8Array(length)
+      let canvas,canvasCtx,w,h
+      let audCtx,srcNode,analyserNode
+
+      onMounted(()=>{
+        //state.sbH = parseInt(window.android.getH()/window.devicePixelRatio)
+        console.log(state.sbH)
+        getList()
+        initCanvas()
+      })
+      function initCanvas(){
+        canvas = document.getElementById('canvas')
+        canvasCtx = canvas.getContext('2d')
+        const div = document.getElementById('spectrum')
+        w = div.getBoundingClientRect().width
+        h = div.getBoundingClientRect().height
+        canvas.width = w
+        canvas.height = h
+      }
+      function getList(){
+        let url = 'https://ca448d14-fda5-4d8f-9279-3f4896d8f854.bspapp.com/index'
+        let data = {
+          action:"getDouYin"
+        }
+        fetch(url,{
+          method:'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body:JSON.stringify(data),
+        })
+        .then( res => res.json() )
+        .then( res => {
+          if( res.message=="成功" ){
+            state.list = res.data
+          }
+        })
+        .catch( err => console.log(err) )
+      }
+      async function play(url,index){
+        state.currentIndex = index
+        audCtx && audCtx.close()
+        render.aniFlag && cancelAnimationFrame(render.aniFlag)
+        audCtx = new AudioContext()
+        srcNode = audCtx.createBufferSource()
+        analyserNode = audCtx.createAnalyser()
+        const arrayBuffer = await getArrayBuffer(url)
+        const audioBuffer = await decodeArrayBuffer(arrayBuffer)
+        srcNode.buffer = audioBuffer
+        srcNode.fftSize = length*2
+        srcNode.loop = true
+        srcNode.connect(analyserNode).connect(audCtx.destination)
+        srcNode.start()
+        render()
+      }
+      function render(){
+        render.aniFlag = window.requestAnimationFrame(render)
+        analyserNode.getByteFrequencyData(list)
+        canvasCtx.clearRect(0,0,w,h)
+        for(let i=0;i<count;i++){
+          canvasCtx.beginPath()
+          canvasCtx.arc(w/count*i,h-h/255*list[i],1,0,2*Math.PI)
+          canvasCtx.fill()
+        }
+      }
+      async function getArrayBuffer(url){
+        return new Promise((resolve,reject)=>{
+          fetch(url,{
+            method:'GET',
+            responseType:'arraybuffer'
+          })
+            .then(res=>res.arrayBuffer())
+            .then(res=>resolve(res))
+        })
+      }
+      async function decodeArrayBuffer(arrayBuffer){
+        return new Promise((resolve,reject)=>{
+          audCtx.decodeAudioData(arrayBuffer)
+            .then(res=>resolve(res))
+        })
+      }
+      return {
+        ...toRefs(state),
+        play,
+      }
+    }
+  })
+  app.mount('#app')
+  </script>
+</body>
+</html>

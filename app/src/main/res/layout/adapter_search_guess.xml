@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="horizontal"
+  android:gravity="center_vertical"
+  android:layout_width="match_parent"
+  android:layout_height="50dp">
+  <com.gq.music.util.Icon
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="10dp"
+    android:textColor="@color/white"
+    android:textSize="15sp"
+    android:text="&#xe62b;"/>
+  <TextView
+    android:id="@+id/tv_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textColor="@color/white"/>
+</LinearLayout>

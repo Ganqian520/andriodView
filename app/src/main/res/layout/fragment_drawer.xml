@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:background="@color/white"
+  android:orientation="vertical"
+  android:paddingTop="100dp"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <TextView
+    android:id="@+id/bt_login"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="登录网易云"/>
+  <TextView
+    android:id="@+id/bt_video"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="抖音视频"/>
+  <TextView
+    android:id="@+id/bt_piano_window"
+    android:text="钢琴窗辅助器"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"/>
+  <TextView
+    android:id="@+id/bt_assist"
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="王者荣耀范围圈"/>
+  <TextView
+    android:id="@+id/bt_musicDou"
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="webview抖音收藏音乐"/>
+  <TextView
+    android:id="@+id/bt_lyric"
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="3d滚动歌词"/>
+  <TextView
+    android:id="@+id/bt_naked3d"
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="裸眼3d背景图"/>
+
+</LinearLayout>
