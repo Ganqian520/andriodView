@@ -55,5 +55,13 @@
     android:text="登录"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
+  <ProgressBar
+    android:id="@+id/pb"
+    android:visibility="gone"
+    android:layout_below="@+id/ll_2"
+    android:layout_margin="40dp"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
 </RelativeLayout>

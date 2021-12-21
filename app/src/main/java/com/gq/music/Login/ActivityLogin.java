@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,46 +50,50 @@ public class ActivityLogin extends AppCompatActivity {
   }
 
   private void initBinding(){
+    ProgressBar pb = findViewById(R.id.pb);
     EditText et_phone = findViewById(R.id.et_phone);
     EditText et_password = findViewById(R.id.et_password);
     TextView bt_login = findViewById(R.id.bt_login);
-    bt_login.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        String url = Data.baseUrl+"/login/cellphone?phone=" + phone + "&password=" + password;
-        Callback cb = new Callback() {
-          @Override
-          public void onFailure(@NotNull Call call, @NotNull IOException e) {
-            System.out.println(e);
-            System.out.println("登陆失败");
-            activity.runOnUiThread(new Runnable() {
-              @Override
-              public void run() {
-                Toast.makeText(getBaseContext(),e.toString(),Toast.LENGTH_LONG);
-              }
-            });
-          }
+    bt_login.setOnClickListener(v -> {
+      pb.setVisibility(View.VISIBLE);
+      bt_login.setVisibility(View.GONE);
+      System.out.println("login click");
+      String url = Data.baseUrl+"/login/cellphone?phone=" + phone + "&password=" + password;
+      Callback cb = new Callback() {
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+          System.out.println(e);
+          System.out.println("登陆失败");
+          activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              Toast.makeText(getBaseContext(),e.toString(),Toast.LENGTH_LONG).show();
+              pb.setVisibility(View.GONE);
+              bt_login.setVisibility(View.VISIBLE);
+            }
+          });
+        }
 
-          @Override
-          public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-            String str = response.body().string();
-            JSONObject res = JSON.parseObject(str);
-            DataLogin dataLogin = new DataLogin();
-            dataLogin.uid = res.getJSONObject("account").getString("id");
-            dataLogin.nickName = res.getJSONObject("profile").getString("nickname");
-            dataLogin.token = res.getString("token");
-            dataLogin.cookie = res.getString("cookie");
-            Data.dataLogin = dataLogin;
-            String str1 = JSON.toJSONString(dataLogin);
-            sp.putString("dataLogin",str1);
-            System.out.println("登录成功，全局datalogin已赋值");
-            System.out.println(dataLogin.cookie);
-            EventBus.getDefault().post(new EventLogin(true));
-            finish();
-          }
-        };
-        Util.get(url,cb);
-      }
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+          String str = response.body().string();
+          System.out.println(str);
+          JSONObject res = JSON.parseObject(str);
+          DataLogin dataLogin = new DataLogin();
+          dataLogin.uid = res.getJSONObject("account").getString("id");
+          dataLogin.nickName = res.getJSONObject("profile").getString("nickname");
+          dataLogin.token = res.getString("token");
+          dataLogin.cookie = res.getString("cookie");
+          Data.dataLogin = dataLogin;
+          String str1 = JSON.toJSONString(dataLogin);
+          sp.putString("dataLogin",str1);
+          System.out.println("登录成功，全局datalogin已赋值");
+          System.out.println(dataLogin.cookie);
+//          EventBus.getDefault().post(new EventLogin(true));
+//          finish();
+        }
+      };
+      Util.get(url,cb);
     });
     et_phone.addTextChangedListener(new TextWatcher() {
       @Override

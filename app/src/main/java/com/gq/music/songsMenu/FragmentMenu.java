@@ -66,6 +66,9 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
   void getData(){ //网易云 在线
     String str = sp.getString("dataLogin");
+    if(str.equals("")){
+      return;
+    }
     DataLogin dataLogin = JSONObject.toJavaObject(JSONObject.parseObject(str),DataLogin.class);
     String url = Data.baseUrl + "/user/playlist?uid=" + dataLogin.uid;
     Callback cb = new Callback() {
