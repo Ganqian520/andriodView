@@ -1,4 +1,4 @@
-package com.gq.music.other.pianoWindow;
+package com.gq.pianoWindow;
 
 import android.content.Context;
 import android.database.Cursor;

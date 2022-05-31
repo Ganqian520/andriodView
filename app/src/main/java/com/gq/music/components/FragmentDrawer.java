@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gq.learnJP.ActivityMain;
 import com.gq.music.databinding.FragmentDrawerBinding;
 import com.gq.music.other.GameAssist.ActivityGame;
 import com.gq.music.Login.ActivityLogin;
@@ -19,7 +20,7 @@ import com.gq.music.R;
 import com.gq.music.event.EventLogin;
 import com.gq.music.other.lyric3d.ActivityLyric;
 import com.gq.music.other.naked3d.ActivityNaked3d;
-import com.gq.music.other.pianoWindow.ActivityPianoWindow;
+import com.gq.pianoWindow.ActivityPianoWindow;
 import com.gq.music.util.SPutil;
 import com.gq.video.ActivityIndexVideo;
 import com.gq.webview.ActivityWebDouMusic;
@@ -49,6 +50,9 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
     init();
   }
   void init(){
+    binding.btJp.setOnClickListener(v->{
+      startActivity(new Intent(getContext(), ActivityMain.class));
+    });
     binding.btMusicDou.setOnClickListener(v->{
       startActivity(new Intent(getContext(), ActivityWebDouMusic.class));
     });

@@ -43,7 +43,9 @@ class FragmentVideos(val tag_:String) : Fragment() {
     EventBus.getDefault().register(this)
     if(list_video.size==0){
       if(GD.list_video.size==0){
-        getVideosLocal()
+        if(!getVideosLocal()){
+          
+        }
       }else{
         getVideoShow()
       }

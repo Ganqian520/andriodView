@@ -19,7 +19,7 @@ public class Data {
 
 //  public static final String baseUrl = "https://autumnfish.cn";
   public static final String baseUrl = "http://cloud-music.pl-fe.cn";
-//  public static final String baseUrl = "http://192.168.1.101:3000";
+//  public static final String baseUrl = "http://192.168.1.100:3000";
 
   public static ArrayList<DataSong> list = new ArrayList<DataSong>();  //歌曲列表
   public static ArrayList<DataSong> list_custom = new ArrayList<DataSong>();//自定义列表

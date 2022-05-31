@@ -1,4 +1,4 @@
-package com.gq.music.other.pianoWindow;
+package com.gq.pianoWindow;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -37,21 +37,18 @@ public class AdapterRcv extends RecyclerView.Adapter<AdapterRcv.Holder> {
   @Override
   public void onBindViewHolder(@NonNull AdapterRcv.Holder holder, int position) {
     holder.id_name.setText((String) list.get(position).get("name"));
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Map res = GD.mySQLite.getPiano((String) list.get(position).get("time"),0);  //拿数据库数据，给canvas用
-        String str = (String) res.get("song");
-        JSONArray arr = JSONArray.parseArray(str);
-        GD.song.clear();
-        for(int i=0;i<arr.size();i++){
-          DataMusic dataMusic = JSONObject.toJavaObject(arr.getJSONObject(i),DataMusic.class);
-          GD.song.add(dataMusic);
-        }
-        EventBus.getDefault().post(list.get(position));
-        System.out.println(list.get(0).get("name"));
-        System.out.println(list.get(1).get("name"));
+    holder.itemView.setOnClickListener(v -> {
+      Map res = GD.mySQLite.getPiano((String) list.get(position).get("time"),0);  //拿数据库数据，给canvas用
+      String str = (String) res.get("song");
+      JSONArray arr = JSONArray.parseArray(str);
+      GD.song.clear();
+      for(int i=0;i<arr.size();i++){
+        DataMusic dataMusic = JSONObject.toJavaObject(arr.getJSONObject(i),DataMusic.class);
+        GD.song.add(dataMusic);
       }
+      EventBus.getDefault().post(list.get(position));
+      System.out.println(list.get(0).get("name"));
+      System.out.println(list.get(1).get("name"));
     });
   }
 

@@ -1,4 +1,4 @@
-package com.gq.music.other.pianoWindow;
+package com.gq.pianoWindow;
 
 public class DataMusic implements Cloneable {
   public int indexX;  //在表格中的序号

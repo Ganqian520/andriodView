@@ -14,8 +14,6 @@ public class MyIntercepter implements Interceptor {
   @NotNull
   @Override
   public Response intercept(@NotNull Chain chain) throws IOException {
-//    System.out.println(Data.dataLogin.token);
-//    System.out.println(Data.dataLogin.cookie);
     Request request =  chain
       .request()
       .newBuilder()

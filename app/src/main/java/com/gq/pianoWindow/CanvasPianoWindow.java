@@ -1,4 +1,4 @@
-package com.gq.music.other.pianoWindow;
+package com.gq.pianoWindow;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

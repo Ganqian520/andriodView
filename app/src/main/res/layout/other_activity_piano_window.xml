@@ -6,8 +6,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context=".other.pianoWindow.ActivityPianoWindow">
-  <com.gq.music.other.pianoWindow.CanvasPianoWindow
+  tools:context="com.gq.pianoWindow.ActivityPianoWindow">
+  <com.gq.pianoWindow.CanvasPianoWindow
     android:id="@+id/canvas_piano_window"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

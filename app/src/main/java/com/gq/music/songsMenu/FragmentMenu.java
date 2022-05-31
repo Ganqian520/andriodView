@@ -64,7 +64,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     v.findViewById(R.id.tv_fm).setOnClickListener(this);
   }
 
-  void getData(){ //网易云 在线
+  void getData(){ //网易云 在线 歌单列表
     String str = sp.getString("dataLogin");
     if(str.equals("")){
       return;
@@ -73,24 +73,26 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     String url = Data.baseUrl + "/user/playlist?uid=" + dataLogin.uid;
     Callback cb = new Callback() {
       @Override
-      public void onFailure(@NotNull Call call, @NotNull IOException e) {}
+      public void onFailure(@NotNull Call call, @NotNull IOException e) {e.printStackTrace();}
       @Override
       public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
         String str = response.body().string();
-        JSONArray arr = JSONObject.parseObject(str).getJSONArray("playlist");
-        list.clear();
-        for (int i = 0; i < arr.size(); i++) {
-          DataSongs dataSongs = new DataSongs();
-          if (!arr.getJSONObject(i).getBoolean("subscribed")) {
-            dataSongs.name = arr.getJSONObject(i).getString("name");
-            dataSongs.id = arr.getJSONObject(i).getString("id");
-            list.add(dataSongs);
+        try {
+          JSONArray arr = JSONObject.parseObject(str).getJSONArray("playlist");
+          list.clear();
+          for (int i = 0; i < arr.size(); i++) {
+            DataSongs dataSongs = new DataSongs();
+            if (!arr.getJSONObject(i).getBoolean("subscribed")) {
+              dataSongs.name = arr.getJSONObject(i).getString("name");
+              dataSongs.id = arr.getJSONObject(i).getString("id");
+              list.add(dataSongs);
+            }
           }
-        }
-        list.get(0).name = "我喜欢";
-        updateView();
-        String str1 = JSON.toJSONString(list);
-        sp.putString("songsList",str1);
+          list.get(0).name = "我喜欢";
+          updateView();
+          String str1 = JSON.toJSONString(list);
+          sp.putString("songsList",str1);
+        }catch (Exception e){e.printStackTrace();}
       }
     };
     Request.get(url,cb);

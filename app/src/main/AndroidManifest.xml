@@ -19,6 +19,9 @@
     android:theme="@style/Theme.Short_song"
     android:usesCleartextTraffic="true"
     tools:replace="android:theme">
+    <activity android:name="com.gq.learnJP.ActivitySentenceNames"></activity>
+    <activity android:name="com.gq.learnJP.ActivityDetail" />
+    <activity android:name="com.gq.learnJP.ActivityMain" />
     <activity android:name="com.gq.webview.ActivityWebDouMusic" />
     <activity android:name="com.gq.video.activity.ActivityEdit" />
     <activity android:name="com.gq.video.activity.ActivityVideoTagsEdit" />
@@ -26,22 +29,16 @@
     <activity android:name="com.gq.video.ActivityIndexVideo" />
     <activity android:name=".search.ActivitySearch" />
     <activity
-      android:name=".other.pianoWindow.ActivityPianoWindow"
+      android:name="com.gq.pianoWindow.ActivityPianoWindow"
       android:screenOrientation="sensorLandscape" />
     <activity android:name=".other.naked3d.ActivityNaked3d" />
     <activity android:name=".other.lyric3d.ActivityLyric" />
     <activity android:name=".Login.ActivityLogin" />
-    <activity android:name=".other.GameAssist.ActivityGame" android:screenOrientation="sensorLandscape" />
-    <activity android:name=".MainActivity">
-<!--    <activity android:name="com.gq.webview.ActivityWebDouMusic">-->
-      <!-- <activity android:name="com.gq.video.ActivityIndexVideo"> -->
-      <!-- <activity android:name=".search.ActivitySearch"> -->
-      <!-- <activity android:name=".other.pianoWindow.ActivityPianoWindow" android:screenOrientation="reverseLandscape"> -->
-      <!-- <activity android:name=".other.naked3d.ActivityNaked3d"> -->
-      <!-- <activity android:name=".other.lyric3d.ActivityLyric" > -->
-      <!-- <activity -->
-      <!-- android:name=".other.GameAssist.ActivityGame" -->
-      <!-- android:screenOrientation="sensorLandscape"> -->
+    <activity
+      android:name=".other.GameAssist.ActivityGame"
+      android:screenOrientation="sensorLandscape" />
+    <activity android:name=".MainActivity"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -51,15 +48,15 @@
     <service
       android:name=".service.PlayerService"
       android:enabled="true"
-      android:exported="true" /> <!-- 后台悬浮窗 -->
+      android:exported="false" /> <!-- 后台悬浮窗 -->
     <service
       android:name=".other.GameAssist.ServiceFloating"
       android:enabled="true"
-      android:exported="true" />
+      android:exported="false" />
     <service
       android:name="com.gq.video.service.ServiceFloat"
       android:enabled="true"
-      android:exported="true" />
+      android:exported="false" />
   </application>
 
 </manifest>

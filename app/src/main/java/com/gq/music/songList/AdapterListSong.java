@@ -39,14 +39,11 @@ public class AdapterListSong extends RecyclerView.Adapter<AdapterListSong.MyView
     holder.text_author.setText(Data.list.get(position).author);
     int duration = Data.originNode==0 ? Data.list.get(position).duration/1000 : Data.list.get(position).duration;
     holder.tv_duration.setText(Util.transTime(duration));
-    holder.ic_add.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Data.list_custom.add(Data.list.get(position));
-        int[] loaction = new int[2];
-        v.getLocationOnScreen(loaction);
-        EventBus.getDefault().post(new EventAddCustom(loaction,position));
-      }
+    holder.ic_add.setOnClickListener(v -> {
+      Data.list_custom.add(Data.list.get(position));
+      int[] loaction = new int[2];
+      v.getLocationOnScreen(loaction);
+      EventBus.getDefault().post(new EventAddCustom(loaction,position));
     });
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

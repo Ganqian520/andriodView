@@ -27,6 +27,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,19 +38,17 @@ public class ActivityLogin extends AppCompatActivity {
   private String phone = "19981490817";
   private String password = "511623aA";
   private SPutil sp;
-  private Activity activity;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
-    this.activity = this;
     transparent();
     sp = new SPutil(this);
     initBinding();
   }
-
   private void initBinding(){
+    Activity that = this;
     ProgressBar pb = findViewById(R.id.pb);
     EditText et_phone = findViewById(R.id.et_phone);
     EditText et_password = findViewById(R.id.et_password);
@@ -57,27 +56,21 @@ public class ActivityLogin extends AppCompatActivity {
     bt_login.setOnClickListener(v -> {
       pb.setVisibility(View.VISIBLE);
       bt_login.setVisibility(View.GONE);
-      System.out.println("login click");
       String url = Data.baseUrl+"/login/cellphone?phone=" + phone + "&password=" + password;
       Callback cb = new Callback() {
         @Override
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
-          System.out.println(e);
-          System.out.println("登陆失败");
-          activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-              Toast.makeText(getBaseContext(),e.toString(),Toast.LENGTH_LONG).show();
-              pb.setVisibility(View.GONE);
-              bt_login.setVisibility(View.VISIBLE);
-            }
+          System.out.println("登陆失败:"+e);
+          that.runOnUiThread(() -> {
+            Toast.makeText(getBaseContext(),e.toString(),Toast.LENGTH_LONG).show();
+            pb.setVisibility(View.GONE);
+            bt_login.setVisibility(View.VISIBLE);
           });
         }
 
         @Override
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-          String str = response.body().string();
-          System.out.println(str);
+          String str = Objects.requireNonNull(response.body()).string();
           JSONObject res = JSON.parseObject(str);
           DataLogin dataLogin = new DataLogin();
           dataLogin.uid = res.getJSONObject("account").getString("id");
@@ -87,10 +80,8 @@ public class ActivityLogin extends AppCompatActivity {
           Data.dataLogin = dataLogin;
           String str1 = JSON.toJSONString(dataLogin);
           sp.putString("dataLogin",str1);
-          System.out.println("登录成功，全局datalogin已赋值");
-          System.out.println(dataLogin.cookie);
-//          EventBus.getDefault().post(new EventLogin(true));
-//          finish();
+          EventBus.getDefault().post(new EventLogin(true));
+          finish();
         }
       };
       Util.get(url,cb);

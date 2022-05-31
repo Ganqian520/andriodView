@@ -7,6 +7,12 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   <TextView
+    android:id="@+id/bt_jp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="日语学习"/>
+  <TextView
     android:id="@+id/bt_login"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
